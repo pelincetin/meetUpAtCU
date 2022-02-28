@@ -1,0 +1,31 @@
+Feature: display the list of users sorted on name
+    As an app user
+    So that I can see people's name alpahbetically
+    I want to see people' profile sorted by their name
+
+Background: The users has been added to database:
+    Given the following users exist:
+    | uni       | name             | major            | college     | bio           | image                                                     | email              | degree         
+    |ap4042     | Angela           | Computer Science | BC          | "coding"      |                                                           | ap4042@barnard.edu | "Undergrad"
+    |ap4142     | Alvin            | Computer Science | BC          | "coding"      |                                                           | ap4142@barnard.edu | "Undergrad"
+    |bp3329     | Pelin            | Economics        | CC          | "econing"     |                                                           | bp3329@columbia.edu| "Master"
+    |jk1000     | Zixuan           | Theater          | GS          | "acting"      |                                                           | jk1000@columbia.edu| "Master"
+    |ak1000     | JD               | Chemistry        | SEAS        | "test tube"   |                                                           | ak1000@columbia.edu| "PhD"
+    And I am on the homepage
+    Then 5 users should exist
+
+
+Scenario: sorting people's profile base on their name
+
+    When I check the following colleges: BC, CC, GS, SEAS
+    Then I should see "Alvin" before "Angela"
+    And I should see "Angela" before "JD"
+    And I should see "JD" before "Pelin"
+    And I should see "Pelin" before "Zixuan"
+
+Scenario: keeping sorted regardless of checkbox
+
+    When I check the following colleges: BC, CC
+    And I uncheck the following colleges: SEAS, GS
+    Then I should see "Alvin" before "Angela"
+    And I should see "Angela" before "Pelin"

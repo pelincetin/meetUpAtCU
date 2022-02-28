@@ -1,0 +1,46 @@
+
+<div class="row justify-content-center">
+  <div class="col-lg-6" align="center">
+  
+  <h1>Sign Up</h1>
+
+  <%= form_tag(profiles_path,{:multipart => true}) do %>
+    <%= label :profile, :name, 'Name: ', :class => 'col-form-label' %>
+    <%= text_field :profile, :name, :class => 'form-control col-7'%>
+    
+    <%= label :profile, :uni, 'UNI:', :class => 'col-form-label' %>
+    <%= text_field :profile, :uni, :class => 'form-control col-7' %>
+    
+    <%= label :profile, :degree, 'Degree:', :class => 'col-form-label'  %>
+    <%= select :profile, :degree, ['Undergrad', 'Masters', 'PhD'] %>
+    <br>
+    <%= label :profile, :college, 'College:', :class => 'col-form-label'  %>
+    <%= select :profile, :college, ['BC', 'GS', 'CC', 'SEAS'] %>
+    <br>
+    <%= label :profile, :major, 'Major:', :class => 'col-form-label'  %>
+    <%= text_field :profile, :major, :class => 'form-control col-7' %>
+    
+    <%= label :profile, :email, 'Email:', :class => 'col-form-label'  %>
+    <%= text_field :profile, :email, :class => 'form-control col-7' %>
+    
+    <%= label :profile, :hobbies, 'Hobbies:', :class => 'col-form-label'  %>
+    <%= text_field :profile, :hobbies, :class => 'form-control col-7' %>
+    
+    <%= label :profile, :classes, 'Classes:', :class => 'col-form-label'  %>
+    <%= text_field :profile, :classes, :class => 'form-control col-7' %>
+    
+    <%= label :profile, :bio, 'Bio:', :class => 'col-form-label'  %>
+    <%= text_field :profile, :bio, :class => 'form-control col-7', :style => 'height: 120px;' %>
+    <br>
+    <%= label :profile, :image, 'Image:', :class => 'col-form-label' %>
+    <label class="btn btn-light">
+      Choose a file<%= file_field(:profile, :image, {:style => "display: none !important;"}) %>
+    </label>
+    <br><br>
+     <%= check_box_tag(:random_match) %>
+     <%= label :profile, :random_match, 'I am okay with being matched randomly.', :class => 'form-check-label'%>
+    
+    <br><br>
+    <%= submit_tag 'Submit', :class =>'btn btn-primary', :style => "background-color: #D6F1FF !important; border-color: #D6F1FF !important; color: #638EA3 !important;" %>
+  <% end %>
+  </div>

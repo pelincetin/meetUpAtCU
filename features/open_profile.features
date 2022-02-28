@@ -1,0 +1,36 @@
+Feature: display the user's profile
+    As an app user
+    So that I can view my personal information
+    I want to see my personal information diplayed
+
+Background: The users has been added to database:
+    Given the following users exist:
+    | uni       | name             | major            | college     | bio           | image                                                     | email              | degree         
+    |ap4042     | Angela           | Computer Science | BC          | "coding"      |                                                           | ap4042@barnard.edu | "Undergrad"
+    |ap4142     | Alvin            | Computer Science | BC          | "coding"      |                                                           | ap4142@barnard.edu | "Undergrad"
+    |bp3329     | Pelin            | Economics        | CC          | "econing"     |                                                           | bp3329@columbia.edu| "Master"
+    |jk1000     | Zixuan           | Theater          | GS          | "acting"      |                                                           | jk1000@columbia.edu| "Master"
+    |ak1000     | JD               | Chemistry        | SEAS        | "test tube"   |                                                           | ak1000@columbia.edu| "PhD"
+    And I am on the homepage
+    Then 5 users should exist
+
+Scenario: Viewing my information
+    When I follow image link "Angela"
+    Then I should see "Computer Science"
+    And I should see "Angela"
+    And I should see "coding"
+    And I should see "BC"
+    And I should see image "app/assets/images/angela.jpg"
+
+Scenario: Deleting
+    Given I am on the homepage 
+    And I am login as "ak1000"
+    And I am on the show my profile page
+    And I follow "View profile"
+    And I press "Delete Profile"
+    Then I should be on the homepage
+    And I should see "Profile 'JD' deleted."
+    And I should not see "Chemistry"
+    
+
+   

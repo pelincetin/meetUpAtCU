@@ -1,0 +1,11 @@
+<h1>Create New Profile</h1>
+
+<%= form_tag profiles_path do %>
+  <%= text_field :profile, :name, 'Name' %>
+  <%= text_field :profile, :uni, 'UNI' %>
+  <%= text_field :profile, :major, 'Major' %>
+  <%= select :profile, :college, ['BC', 'GS', 'CC', 'SEAS'] %>
+  <%= text_field :profile, :email, 'Email' %>
+  <%= text_field :profile, :bio, 'Bio' %>
+  <%= submit_tag 'Save Changes' %>
+<% end %>

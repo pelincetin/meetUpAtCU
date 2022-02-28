@@ -1,0 +1,50 @@
+Feature: create new profile
+    As an app user
+    So that I can add myself to the database
+    I want people to see my profile
+
+Background: The users has been added to database:
+    Given the following users exist:
+    | uni       | name             | major            | college     | bio           | image                                                     | email              | degree         
+    |ap4042     | Angela           | Computer Science | BC          | "coding"      |                                                           | ap4042@barnard.edu | "Undergrad"
+    |ap4142     | Alvin            | Computer Science | BC          | "coding"      |                                                           | ap4142@barnard.edu | "Undergrad"
+    |bp3329     | Pelin            | Economics        | CC          | "econing"     |                                                           | bp3329@columbia.edu| "Master"
+    |jk1000     | Zixuan           | Theater          | GS          | "acting"      |                                                           | jk1000@columbia.edu| "Master"
+    |ak1000     | JD               | Chemistry        | SEAS        | "test tube"   |                                                           | ak1000@columbia.edu| "PhD"
+    And I am on the homepage
+    Then 5 users should exist
+Scenario: I don't exist in the database
+
+    When I am on the homepage
+    Then I should not see "Appa"
+
+Scenario: go to the new profile page
+
+    When I follow "Sign Up"
+    Then I should be on the new profile page
+
+Scenario: I do not want to continue adding new profile
+
+    Given I am on the new profile page
+    And I follow "Meet Up At CU ☕"
+    Then I should be on the homepage
+
+Scenario: start create my profile
+
+    Given I am on the new profile page
+    And I fill in "Name:" with "Appa"
+    And I fill in "UNI:" with "pc2807"
+    And I fill in "Major:" with "CS"
+    And I select "SEAS" from "College:"
+    And I select "Undergrad" from "Degree:"
+    And I fill in "Email:" with "appa@columbia.edu"
+    And I fill in "Bio:" with "I’m a cat"
+    And I fill in "Hobbies:" with "sleeping"
+    And I fill in "Classes:" with "PLT"
+    And I check "random_match"
+    And I press "Submit"
+    Then I should be on the homepage
+    And I should see "Appa"
+    And I should see "I’m a cat"
+    And I should see "Angela" before "Appa"
+    And I should see "CS"

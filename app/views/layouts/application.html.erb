@@ -1,0 +1,53 @@
+<%# Our "base" layout should be a valid HTML document. %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Meet Up @CU</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <%= stylesheet_link_tag 'application', 'media' => 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <%# These classes come from the Bootstrap CSS framework. %>
+    <nav class="navbar navbar-expand-lg bg-primary text-white mb-3">
+      <h1 class="navbar-brand">
+        <%= link_to 'Meet Up At CU ☕', profiles_path,  style: 'padding-left:53px; color: #638EA3 !important; font-size: 35px;'%>
+      </h1>
+      <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+        <% if !session[:user_id].nil? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= Profile.find_by(uni: session[:user_id]).name %>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <span class="dropdown-item">
+                <%= link_to 'View profile', show_my_profile_path, class: "nav-link", method: "get" %>
+              </span>
+              <span class="dropdown-item">
+                <%= link_to 'Log out', signout_path, class: "nav-link", method: "delete" %>
+              </span>
+            </div>
+          </li>
+        <% else %>
+          <li>
+            <span class="nav-link" ><%= link_to 'Log in', '/auth/google_oauth2', class: "nav-link", method: "get" %></span>
+          </li>
+          <li>
+            <span class="nav-link" ><%= link_to 'Sign Up', new_profile_path, class: "nav-link", method: "get" %></span>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+    <div class="container">
+      <%# Render "flash" messages in our application. This loads _flash.erb %>
+      <%= render 'layouts/flash' %>
+      <main id="main">
+        <%= yield %>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+meetUpAtCU/.bundle/
+meetUpAtCU/.rspec
+meetUpAtCU/.ruby-version
+meetUpAtCU/coverage/
+meetUpAtCU/db/*.sqlite3
+meetUpAtCU/db/schema.rb
+meetUpAtCU/lib/tasks/
+meetUpAtCU/log/
+meetUpAtCU/tmp/
+meetUpAtCU/vendor/bundle

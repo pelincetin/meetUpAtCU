@@ -1,0 +1,49 @@
+Feature: Check wether the mail was sucssefully sent 
+    As an app user
+    So that i can contact other people
+    And recieve messeges
+
+Background: The users has been added to database:
+    Given the following users exist:
+    | uni       | name             | major            | college     | bio           | image                                                     | email              | degree         
+    |ap4042     | Angela           | Computer Science | BC          | "coding"      |                                                           | ap4042@barnard.edu | "Undergrad"
+    |ap4142     | Alvin            | Computer Science | BC          | "coding"      |                                                           | ap4142@barnard.edu | "Undergrad"
+    |bp3329     | Pelin            | Economics        | CC          | "econing"     |                                                           | bp3329@columbia.edu| "Master"
+    |jk1000     | Zixuan           | Theater          | GS          | "acting"      |                                                           | jk1000@columbia.edu| "Master"
+    |ak1000     | JD               | Chemistry        | SEAS        | "test tube"   |                                                           | ak1000@columbia.edu| "PhD"
+    And I am on the homepage
+    Then 5 users should exist
+    
+Scenario: Sending message
+    Given I am login as "ak1000"
+    And I am on the profile page for "Angela"
+    And I fill in "Your message:" with "YES I REACHED!"
+    And I press "Send"
+    Then I should be on the homepage
+    And I should see "Your message to Angela was successfully sent."
+    
+Scenario: Sending message(not login)
+    Given I am on the homepage
+    And I am on the profile page for "Angela"
+    And I should not see "Send"
+    And I should not see "Your message:"
+    
+    
+Scenario: Random match
+    Given I am on the homepage 
+    And I am login as "ak1000"
+    When I press "Match me randomly"
+    Then I should be on the homepage
+    And I should see "You and"
+    And I should see "were successfully matched."
+    
+
+
+Scenario: Random match (not login)
+    Given I am on the homepage 
+    Then I should not see "Match me randomly"
+    And I should not see "You and"
+    And I should not see "were successfully matched."
+
+
+    

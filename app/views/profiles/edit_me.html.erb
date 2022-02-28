@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+  <div class="col-lg-6" align="center">
+
+  <h2>Edit Profile</h2>
+    
+  Name:
+  <p><%= @profile.name %> </p>
+  Email:
+  <p><%= @profile.email %> </p>
+    
+  <%= form_tag(show_my_profile_path(@profile.uni), {:method => :put, :multipart => true}) do %>
+    <%= label :profile, :major, 'Major:', :class => 'col-form-label'  %>
+    <%= text_field :profile, :major, :class => 'form-control col-7' %>
+    <%= label :profile, :college, 'College:', :class => 'col-form-label'  %>
+    <%= select :profile, :college, ['BC', 'GS', 'CC', 'SEAS'] %>
+    <br>
+    <%= label :profile, :degree, 'Degree:', :class => 'col-form-label'  %>
+    <%= select :profile, :degree, ['Undergrad', 'Masters', 'PhD'] %>
+    
+    <%= label :profile, :classes, 'Classes:', :class => 'col-form-label'  %>
+    <%= text_field :profile, :classes, :class => 'form-control col-7' %>
+    
+    <%= label :profile, :hobbies, 'Hobbies:', :class => 'col-form-label'  %>
+    <%= text_field :profile, :hobbies, :class => 'form-control col-7' %>
+    
+    <%= label :profile, :bio, 'Bio:', :class => 'col-form-label'  %>
+    <%= text_field :profile, :bio, :class => 'form-control col-7', :style => 'height: 120px;' %>
+    <br>
+    <%= label :profile, :image, 'Image:', :class => 'col-form-label'  %>
+    <label class="btn btn-light">
+      Choose a file<%= file_field(:profile, :image, {:style => "display: none !important;"}) %>
+    </label>
+    <br><br>
+     <%= check_box_tag :random_match, "1", @profile.random_match? %>
+     <%= label_tag(:random_match, "I am okay with random match") %>
+    <br><br>
+    <%= submit_tag 'Save Changes', :class =>'btn btn-primary' %>
+  <% end %>
+  </div>
+</div>

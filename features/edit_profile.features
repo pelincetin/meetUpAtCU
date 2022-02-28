@@ -1,0 +1,148 @@
+Feature: edit the user's profile
+    As an app user
+    So that I can change my personal information
+    I want to see my personal information diplayed and then changed
+
+Background: The users has been added to database:
+    Given the following users exist:
+    | uni       | name             | major            | college     | bio           | image                                                     | email              | degree         
+    |ap4042     | Angela           | Computer Science | BC          | "coding"      |                                                           | ap4042@barnard.edu | "Undergrad"
+    |ap4142     | Alvin            | Computer Science | BC          | "coding"      |                                                           | ap4142@barnard.edu | "Undergrad"
+    |bp3329     | Pelin            | Economics        | CC          | "econing"     |                                                           | bp3329@columbia.edu| "Master"
+    |jk1000     | Zixuan           | Theater          | GS          | "acting"      |                                                           | jk1000@columbia.edu| "Master"
+    |ak1000     | JD               | Chemistry        | SEAS        | "test tube"   |                                                           | ak1000@columbia.edu| "PhD"
+    And I am on the homepage
+    Then 5 users should exist
+
+
+
+Scenario:Buffer behavoir of iteration 2
+  Given I am on the homepage 
+  And I am login as "ak1000"
+  And I am on the show my profile page
+  And I follow "View profile"
+  Then I should see "SEAS"
+  
+  
+  
+Scenario: Changing major
+    Given I am on the homepage 
+    And I am login as "ak1000"
+    And I am on the show my profile page
+    And I follow "View profile"
+    And I press "Edit Profile"
+    Given I am on the edit page 
+    And I fill in "Major:" with "Biology"
+    And I press "Save Changes"
+    Then I should be on the show my profile page
+    And I should see "JD"
+    And I should see "Biology"
+    And I should see "JD was successfully updated."
+
+
+
+Scenario: Changing college
+    Given I am on the homepage 
+    And I am login as "ak1000"
+    And I am on the show my profile page
+    And I follow "View profile"
+    And I press "Edit Profile"
+    Given I am on the edit page 
+    And I select "BC" from "College:"
+    And I press "Save Changes"
+    Then I should be on the show my profile page
+    And I should see "JD"
+    And I should see "BC"
+    And I should see "JD was successfully updated."
+
+Scenario: Changing Bio
+    Given I am on the homepage 
+    And I am login as "ak1000"
+    And I am on the show my profile page
+    And I follow "View profile"
+    And I press "Edit Profile"
+    Given I am on the edit page 
+    And I fill in "Bio:" with "Grinding"
+    And I press "Save Changes"
+    Then I should be on the show my profile page
+    And I should see "JD"
+    And I should see "Grinding"
+    And I should see "JD was successfully updated."
+
+
+
+Scenario: Changing major
+    Given I am on the homepage 
+    And I am login as "ak1000"
+    And I am on the show my profile page
+    And I follow "View profile"
+    And I press "Edit Profile"
+    Then I am on the edit page
+    And I fill in "Major:" with "Economics"
+    And I press "Save Changes"
+    Then I should be on the show my profile page
+    And I should see "JD"
+    And I should see "Economics"
+    And I should see "JD was successfully updated."
+
+
+
+Scenario: Changing classes
+    Given I am on the homepage 
+    And I am login as "ak1000"
+    And I am on the show my profile page
+    And I follow "View profile"
+    And I press "Edit Profile"
+    Then I am on the edit page
+    And I fill in "Classes:" with "Engineering: Software as a Service"
+    And I press "Save Changes"
+    Then I should be on the show my profile page
+    And I should see "JD"
+    And I should see "Engineering: Software as a Service"
+    And I should see "JD was successfully updated."
+
+
+Scenario: Changing Hobbies
+    Given I am on the homepage 
+    And I am login as "ak1000"
+    And I am on the show my profile page
+    And I follow "View profile"
+    And I press "Edit Profile"
+    Then I am on the edit page
+    And I fill in "Hobbies:" with "Listening to music"
+    And I press "Save Changes"
+    Then I should be on the show my profile page
+    And I should see "JD"
+    And I should see "Listening to music"
+    And I should see "JD was successfully updated."
+
+Scenario: Changing College
+    Given I am on the homepage 
+    And I am login as "ak1000"
+    And I am on the show my profile page
+    And I follow "View profile"
+    And I press "Edit Profile"
+    Then I am on the edit page
+    And I select option "BC" from "College"
+    And I press "Save Changes"
+    Then I should be on the show my profile page
+    And I should see "JD"
+    And I should see "BC"
+    And I should see "JD was successfully updated."
+
+Scenario: Changing Degree
+    Given I am on the homepage 
+    And I am login as "ak1000"
+    And I am on the show my profile page
+    And I follow "View profile"
+    And I press "Edit Profile"
+    Then I am on the edit page
+    And I select option "PhD" from "Degree"
+    And I press "Save Changes"
+    Then I should be on the show my profile page
+    And I should see "JD"
+    And I should see "PhD"
+    And I should see "JD was successfully updated."
+
+
+

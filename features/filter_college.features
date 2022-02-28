@@ -1,0 +1,63 @@
+Feature: display the list of users filter by college
+    As an app user
+    So that I can see people from spefcific colleges
+    I want to see people' profile sorted filtered by the college they go to
+
+Background: The users has been added to database:
+    Given the following users exist:
+    | uni       | name             | major            | college     | bio           | image                                                     | email              | degree         
+    |ap4042     | Angela           | Computer Science | BC          | "coding"      |                                                           | ap4042@barnard.edu | "Undergrad"
+    |ap4142     | Alvin            | Computer Science | BC          | "coding"      |                                                           | ap4142@barnard.edu | "Undergrad"
+    |bp3329     | Pelin            | Economics        | CC          | "econing"     |                                                           | bp3329@columbia.edu| "Master"
+    |jk1000     | Zixuan           | Theater          | GS          | "acting"      |                                                           | jk1000@columbia.edu| "Master"
+    |ak1000     | JD               | Chemistry        | SEAS        | "test tube"   |                                                           | ak1000@columbia.edu| "PhD"
+    And I am on the homepage
+    Then 5 users should exist
+
+Scenario: Check if Angela is in on the webpage
+    Given I am on the homepage
+    Then I should see "Sign Up"
+    When I uncheck the following colleges: BC
+    And I press "Refresh"
+    And I should not see "Angela"
+
+
+Scenario: restrict to 'BC' and 'SEAS' and 'Undergrad'
+    Given I am on the homepage
+    When I uncheck the following colleges: SEAS, CC
+    And I uncheck the following degrees: Masters, PhD
+    And I press "Refresh"
+    Then I am on the homepage 
+    Then I should see all the users
+    Then I should see "Angela"
+    And I should see "Alvin"
+    Then I should not see "JD"
+    And I should not see "Pelin"
+    And I should not see "Zixuan"
+
+Scenario: all colleges selected
+    When I check the following colleges: BC, CC, GS, SEAS
+    And I press "Refresh"
+    Then I am on the homepage 
+    Then I should see all the users
+
+Scenario: non-checked equals all-checked
+
+    When I uncheck the following colleges: BC, CC, GS, SEAS
+    And I press "Refresh"
+    Then I should see all the users
+    
+
+Scenario: non-checked degrees equals all-checked
+    
+    When I check the following degrees: Masters, PhD, Undergrad
+    And I press "Refresh"
+    Then I should see all the users
+   
+
+Scenario: Unchecking undegrad 
+    
+    When I uncheck the following degrees: Undergrad
+    And I press "Refresh"
+    Then I should not see "Angela"
+  

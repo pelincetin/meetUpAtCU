@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  text: MyString
+  from_uni: MyString
+  to_uni: MyString
+  created_at: 2021-11-03 01:44:11
+
+two:
+  text: MyString
+  from_uni: MyString
+  to_uni: MyString
+  created_at: 2021-11-03 01:44:11
